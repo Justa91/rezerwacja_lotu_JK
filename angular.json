@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "booking"
+    }
+  },
+  "defaultProject": "booking",
+  "cli": {
+    "analytics": false
+  }
 }

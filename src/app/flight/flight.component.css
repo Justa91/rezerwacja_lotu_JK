@@ -1,0 +1,27 @@
+.title {
+  display: none;
+}
+
+@media (min-width: 700px) {
+  .title {
+    display: block;
+  }
+}
+
+.btn {
+  background-color: #e38578;
+  color: white;
+
+}
+
+.content {
+  background-color: #78d8e3;
+}
+
+.card-header {
+  background-color: #e3c475;
+}
+
+h3 {
+  padding-top: 20px;
+}

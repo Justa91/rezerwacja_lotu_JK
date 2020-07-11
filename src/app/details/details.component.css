@@ -1,0 +1,27 @@
+.title {
+    display:none;
+}
+@media (min-width: 700px) {
+    .title {
+        display: block;
+    }
+}
+
+.card-header {
+    background-color: #e38578;
+}
+
+.btn {
+    background-color:#e38578;
+    color: white;
+}
+
+.jumbotron {
+    background-color: #e3c475;
+
+}
+
+.float-left {
+    background-color: #78d8e3;
+
+}

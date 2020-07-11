@@ -1,0 +1,580 @@
+<h1 class="float-left title">SZCZEGÓŁY LOTU</h1>
+<h3 class="float-right">
+	<timer></timer>
+</h3>
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="row mb-3">
+				<div class="col-md-12">
+					<div class="jumbotron jumbotron-fluid">
+						<div class="row">
+							<div class="col-md-5 text-center">
+								<h1>{{flightData.from}}</h1>
+							</div>
+							<div class="col-md-2 text-center">
+								<h3>do</h3>
+							</div>
+							<div class="col-md-5 text-center">
+								<h1>{{flightData.to}}</h1>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-5 text-center ">
+							<h4>{{flightData.dep}} ---> {{flightData.arrival}}</h4>
+						</div>
+					</div>
+				</div>
+			</div>
+			<hr>
+			<div *ngIf="stage == 1" class="row mt-3">
+				<div class="col-md-3">
+					<h3>Koszyk zakupów</h3>
+					<div class="accordion" id="accordionExample">
+						<div *ngFor="let card of shoppingCart" class="card">
+							<div class="card-header" id="headingOne">
+								<h2 class="mb-0">
+									<button class="btn btn-link" type="button" data-toggle="collapse"
+										[attr.data-target]="'#id'+card.id" aria-expanded="false"
+										[attr.aria-valuenow]="'id'+card.id">
+										Miejsce numer: {{card.id}}
+									</button>
+								</h2>
+							</div>
+							<div id="id{{card.id}}" class="collapse" aria-labelledby="headingOne"
+								data-parent="#accordionExample">
+								<div class="card-body">
+									<div class="input-group mb-3">
+										<div class="input-group-prepend">
+											<label class="input-group-text"
+												for="inputGroupSelect{{card.id}}">Zniżka</label>
+										</div>
+										<select (change)="calcSumPrice()" [(ngModel)]="card.discount"
+											class="custom-select" id="inputGroupSelect{{card.id}}">
+											<option value="0" selected>Normalny</option>
+											<option value="0.6">Senior</option>
+											<option value="0.8">Niepełnosprawny</option>
+											<option value="0.5">Student</option>
+										</select>
+									</div>
+									<hr>
+									<div class="input-group mb-3">
+										<div class="input-group-prepend">
+											<label class="input-group-text"
+												for="inputGroupSelectLag{{card.id}}">Bagaż</label>
+										</div>
+										<select (change)="calcSumPrice()" [(ngModel)]="card.luggage"
+											class="custom-select" id="inputGroupSelectLag{{card.id}}">
+											<option value="100" selected>>10kg </option>
+											<option value="150">10><25kg< /option>
+											<option value="300">
+												<25kg< /option>
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="jumbotron px-1 py-2 mt-3">
+						<div class="row">
+							<div class="col-md-6">
+								Cena: <b>{{calculatedPrice}}</b>
+							</div>
+							<div class="col-md-6">
+								<select class="custom-select" (change)="calcSumPrice()" [(ngModel)]="currency"
+									id="inputGroupSelectLag">
+									<option value="ZL" selected>PLN</option>
+									<option value="CHF">CHF</option>
+									<option value="USD">USD</option>
+									<option value="NOK">NOK</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12">
+						<button *ngIf="shoppingCart.length>0" class="button btn btn-lg btn-primary w-100"
+							(click)="summary()">Podsumowanie</button>
+					</div>
+				</div>
+				<div class="col-md-9">
+					<div *ngIf="flightData.type == 1">
+						<svg version="1.1" id="Warstwa_1" xmlns="http://www.w3.org/2000/svg"
+							xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 841.89 595.28"
+							style="enable-background:new 0 0 841.89 595.28;" xml:space="preservesvg ">
+							<style type="text/css">
+								.st0 {
+									fill: none;
+									stroke: #000000;
+									stroke-width: 3;
+									stroke-miterlimit: 10;
+								}
+
+								.st1 {
+									fill: #040304;
+									stroke: #000000;
+									stroke-width: 3;
+									stroke-miterlimit: 10;
+								}
+
+								.st2 {
+									fill: #FFFFFF;
+									stroke: #000000;
+									stroke-width: 3;
+									stroke-miterlimit: 10;
+								}
+
+								.st2:hover {
+									fill: yellow !important;
+								}
+							</style>
+							<path class="st0" d="M467.76,434.91c0-27.83,0-138.79,0-224.36c0-54.94,0-99.43,0-104.74c-2.3-11.8-10.05-28.29-19.72-48.44
+					   C441.24,43.2,434,32.8,425.71,31.54c-15.23,2-28.21,38.89-41.29,74.27v329.1c7.28,40.55,25.97,110.65,41.29,111.59
+					   S459.28,475.65,467.76,434.91z" />
+							<path class="st0" d="M456.14,490.18c0,0,92.68,56.83,92.69,62.36c0.01,5.53-111.83-16.4-111.83-16.4
+					   C443.1,524.16,449.57,507.79,456.14,490.18z" />
+							<path class="st0" d="M395.13,490.56c0,0-92.68,56.83-92.69,62.36c-0.01,5.53,111.83-16.4,111.83-16.4
+					   C408.17,524.54,401.71,508.17,395.13,490.56z" />
+							<path class="st0" d="M528.28,242.29" />
+							<path class="st0"
+								d="M577.18,257.39c110.26,49.75,263,123.08,251.7,130.41c-10.22,6.64-238.87-61.23-238.87-61.23l-121.8-2.08" />
+							<path class="st0" d="M467.76,210.54c1.42-0.81,27,9.72,63.78,25.95" />
+							<line class="st0" x1="534.38" y1="210.26" x2="581.24" y2="210.26" />
+							<line class="st0" x1="529.38" y1="219.01" x2="586.49" y2="218.95" />
+							<line class="st0" x1="530.7" y1="211.46" x2="530.76" y2="219" />
+							<line class="st0" x1="529.98" y1="212.95" x2="537.07" y2="212.95" />
+							<line class="st0" x1="578.6" y1="212.53" x2="586.5" y2="212.53" />
+							<line class="st0" x1="585.04" y1="217.95" x2="585.04" y2="212" />
+							<line class="st0" x1="576.33" y1="250.29" x2="584.41" y2="250.29" />
+							<line class="st0" x1="585.04" y1="218.95" x2="585.05" y2="251.83" />
+							<line class="st0" x1="577.84" y1="249.43" x2="577.84" y2="257.93" />
+							<line class="st0" x1="530.78" y1="219" x2="530.88" y2="235.85" />
+							<line class="st0" x1="530.88" y1="235.85" x2="530.83" y2="247.96" />
+							<line class="st0" x1="530.84" y1="246.54" x2="537.73" y2="246.61" />
+							<line class="st0" x1="536.26" y1="246.58" x2="536.26" y2="261.24" />
+							<line class="st0" x1="536.26" y1="259.82" x2="549.69" y2="260" />
+							<line class="st0" x1="552.71" y1="259.91" x2="552.71" y2="275.69" />
+							<line class="st0" x1="545.15" y1="259.94" x2="554.13" y2="259.94" />
+							<line class="st0" x1="552.71" y1="275.69" x2="563.48" y2="275.69" />
+							<line class="st0" x1="562.98" y1="275.69" x2="562.98" y2="257.67" />
+							<line class="st0" x1="562.54" y1="259.12" x2="581.53" y2="259.12" />
+							<line class="st0" x1="468.22" y1="302.1" x2="589.56" y2="325.58" />
+							<rect x="636.43" y="311.03" class="st1" width="6.24" height="36.28" />
+							<rect x="581.93" y="300.87" class="st1" width="6.24" height="36.28" />
+							<rect x="521.73" y="296.1" class="st1" width="6.24" height="36.28" />
+							<path class="st0" d="M323.91,242.29" />
+							<path class="st0"
+								d="M275.01,257.39c-110.26,49.75-263,123.08-251.7,130.41c10.22,6.64,238.87-61.23,238.87-61.23l121.8-2.08" />
+							<path class="st0" d="M384.43,210.54c-1.42-0.81-27,9.72-63.78,25.95" />
+							<line class="st0" x1="317.81" y1="210.26" x2="270.94" y2="210.26" />
+							<line class="st0" x1="322.81" y1="219.01" x2="265.7" y2="218.95" />
+							<line class="st0" x1="321.49" y1="211.46" x2="321.43" y2="219" />
+							<line class="st0" x1="322.2" y1="212.95" x2="315.12" y2="212.95" />
+							<line class="st0" x1="273.59" y1="212.53" x2="265.69" y2="212.53" />
+							<line class="st0" x1="267.15" y1="217.95" x2="267.15" y2="212" />
+							<line class="st0" x1="275.86" y1="250.29" x2="267.78" y2="250.29" />
+							<line class="st0" x1="267.15" y1="218.95" x2="267.14" y2="251.83" />
+							<line class="st0" x1="274.35" y1="249.43" x2="274.35" y2="257.93" />
+							<line class="st0" x1="321.41" y1="219" x2="321.31" y2="235.85" />
+							<line class="st0" x1="321.31" y1="235.85" x2="321.36" y2="247.96" />
+							<line class="st0" x1="321.35" y1="246.54" x2="314.46" y2="246.61" />
+							<line class="st0" x1="315.93" y1="246.58" x2="315.93" y2="261.24" />
+							<line class="st0" x1="315.93" y1="259.82" x2="302.5" y2="260" />
+							<line class="st0" x1="299.48" y1="259.91" x2="299.48" y2="275.69" />
+							<line class="st0" x1="307.04" y1="259.94" x2="298.06" y2="259.94" />
+							<line class="st0" x1="299.48" y1="275.69" x2="288.71" y2="275.69" />
+							<line class="st0" x1="289.2" y1="275.69" x2="289.2" y2="257.67" />
+							<line class="st0" x1="289.65" y1="259.12" x2="270.66" y2="259.12" />
+							<line class="st0" x1="383.97" y1="302.1" x2="262.63" y2="325.58" />
+							<rect x="209.53" y="311.03"
+								transform="matrix(-1 -4.491886e-11 4.491886e-11 -1 425.2914 658.3464)" class="st1"
+								width="6.24" height="36.28" />
+							<rect x="264.02" y="300.87"
+								transform="matrix(-1 -4.491886e-11 4.491886e-11 -1 534.2795 638.0179)" class="st1"
+								width="6.24" height="36.28" />
+							<rect x="324.22" y="296.1"
+								transform="matrix(-1 -4.491886e-11 4.491886e-11 -1 654.683 628.4882)" class="st1"
+								width="6.24" height="36.28" />
+							<rect (click)="reserve($event, 1)" id="_x31_" x="392.65" y="206" class="st2" width="23.24"
+								height="23.24" />
+							<rect (click)="reserve($event, 3)" id="_x33_" x="392.65" y="234.96" class="st2"
+								width="23.24" height="23.24" />
+							<rect (click)="reserve($event, 2)" id="_x32_" x="435.45" y="206" class="st2" width="23.24"
+								height="23.24" />
+							<rect (click)="reserve($event, 4)" id="_x34__1_" x="435.45" y="234.96" class="st2"
+								width="23.24" height="23.24" />
+							<rect (click)="reserve($event, 5)" id="_x35_" x="392.65" y="302.62" class="st2"
+								width="23.24" height="23.24" />
+							<rect (click)="reserve($event, 7)" id="_x37_" x="392.65" y="331.06" class="st2"
+								width="23.24" height="23.24" />
+							<rect (click)="reserve($event, 9)" id="_x39_" x="392.65" y="359.79" class="st2"
+								width="23.24" height="23.24" />
+							<rect (click)="reserve($event, 6)" id="_x36_" x="435.45" y="302.48" class="st2"
+								width="23.24" height="23.24" />
+							<rect (click)="reserve($event, 8)" id="_x38_" x="435.45" y="330.92" class="st2"
+								width="23.24" height="23.24" />
+							<rect (click)="reserve($event, 10)" id="_x31_0" x="435.45" y="359.65" class="st2"
+								width="23.24" height="23.24" />
+						</svg>
+
+					</div>
+
+					<div *ngIf="flightData.type == 2">
+						<svg version="1.1" id="Warstwa_1" xmlns="http://www.w3.org/2000/svg"
+							xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 841.9 595.3"
+							style="enable-background:new 0 0 841.9 595.3;" xml:space="preserve">
+							<style type="text/css">
+								.st0 {
+									fill: none;
+									stroke: #000000;
+									stroke-width: 3;
+									stroke-miterlimit: 10;
+								}
+
+								.st1 {
+									fill: #040304;
+									stroke: #000000;
+									stroke-width: 3;
+									stroke-miterlimit: 10;
+								}
+
+								.st2 {
+									fill: #FFFFFF;
+									stroke: #000000;
+									stroke-width: 3;
+									stroke-miterlimit: 10;
+								}
+							</style>
+							<path class="st0"
+								d="M467.8,434.9c0-27.8,0-138.8,0-224.4c0-54.9,0-99.4,0-104.7c-2.3-11.8-10-28.3-19.7-48.4
+	c-6.8-14.2-14-24.6-22.3-25.8c-15.2,2-28.2,38.9-41.3,74.3v329.1c7.3,40.5,26,110.6,41.3,111.6S459.3,475.7,467.8,434.9z" />
+							<path class="st0"
+								d="M456.1,490.2c0,0,92.7,56.8,92.7,62.4c0,5.5-111.8-16.4-111.8-16.4C443.1,524.2,449.6,507.8,456.1,490.2z" />
+							<path class="st0"
+								d="M395.1,490.6c0,0-92.7,56.8-92.7,62.4c0,5.5,111.8-16.4,111.8-16.4C408.2,524.5,401.7,508.2,395.1,490.6z" />
+							<path class="st0" d="M528.3,242.3" />
+							<path class="st0" d="M468.2,324.5" />
+							<path class="st0"
+								d="M722.3,325.4c64,31.4,113.2,58.1,106.6,62.4c-10.2,6.6-238.9-61.2-238.9-61.2" />
+							<path class="st0" d="M577.2,257.4c31,14,65.4,29.9,98.6,45.6" />
+							<path class="st0" d="M467.8,210.5c1.4-0.8,27,9.7,63.8,25.9" />
+							<line class="st0" x1="534.4" y1="210.3" x2="581.2" y2="210.3" />
+							<line class="st0" x1="529.4" y1="219" x2="586.5" y2="219" />
+							<line class="st0" x1="530.7" y1="211.5" x2="530.8" y2="219" />
+							<line class="st0" x1="530" y1="213" x2="537.1" y2="213" />
+							<line class="st0" x1="578.6" y1="212.5" x2="586.5" y2="212.5" />
+							<line class="st0" x1="585" y1="218" x2="585" y2="212" />
+							<line class="st0" x1="576.3" y1="250.3" x2="584.4" y2="250.3" />
+							<line class="st0" x1="585" y1="219" x2="585" y2="251.8" />
+							<line class="st0" x1="577.8" y1="249.4" x2="577.8" y2="257.9" />
+							<line class="st0" x1="530.8" y1="219" x2="530.9" y2="235.9" />
+							<line class="st0" x1="530.9" y1="235.9" x2="530.8" y2="248" />
+							<line class="st0" x1="530.8" y1="246.5" x2="537.7" y2="246.6" />
+							<line class="st0" x1="536.3" y1="246.6" x2="536.3" y2="261.2" />
+							<line class="st0" x1="536.3" y1="259.8" x2="549.7" y2="260" />
+							<line class="st0" x1="552.7" y1="259.9" x2="552.7" y2="275.7" />
+							<line class="st0" x1="545.2" y1="259.9" x2="554.1" y2="259.9" />
+							<line class="st0" x1="552.7" y1="275.7" x2="563.5" y2="275.7" />
+							<line class="st0" x1="563" y1="275.7" x2="563" y2="257.7" />
+							<line class="st0" x1="562.5" y1="259.1" x2="581.5" y2="259.1" />
+							<line class="st0" x1="468.2" y1="302.1" x2="591.1" y2="326.9" />
+							<rect x="636.4" y="311" class="st1" width="6.2" height="36.3" />
+							<rect x="521.7" y="296.1" class="st1" width="6.2" height="36.3" />
+							<path class="st0" d="M323.9,242.3" />
+							<path class="st0" d="M384,324.5" />
+							<path class="st0"
+								d="M133.6,323.6c-65.8,32.2-117,59.8-110.3,64.2c10.2,6.6,238.9-61.2,238.9-61.2l0.5,0" />
+							<path class="st0" d="M275,257.4c-30.3,13.5-63.8,28.7-96.2,43.8" />
+							<path class="st0" d="M384.4,210.5c-1.4-0.8-27,9.7-63.8,25.9" />
+							<line class="st0" x1="317.8" y1="210.3" x2="270.9" y2="210.3" />
+							<line class="st0" x1="322.8" y1="219" x2="265.7" y2="219" />
+							<line class="st0" x1="321.5" y1="211.5" x2="321.4" y2="219" />
+							<line class="st0" x1="322.2" y1="213" x2="315.1" y2="213" />
+							<line class="st0" x1="273.6" y1="212.5" x2="265.7" y2="212.5" />
+							<line class="st0" x1="267.1" y1="218" x2="267.1" y2="212" />
+							<line class="st0" x1="275.9" y1="250.3" x2="267.8" y2="250.3" />
+							<line class="st0" x1="267.1" y1="219" x2="267.1" y2="251.8" />
+							<line class="st0" x1="274.4" y1="249.4" x2="274.4" y2="257.9" />
+							<line class="st0" x1="321.4" y1="219" x2="321.3" y2="235.9" />
+							<line class="st0" x1="321.3" y1="235.9" x2="321.4" y2="248" />
+							<line class="st0" x1="321.4" y1="246.5" x2="314.5" y2="246.6" />
+							<line class="st0" x1="315.9" y1="246.6" x2="315.9" y2="261.2" />
+							<line class="st0" x1="315.9" y1="259.8" x2="302.5" y2="260" />
+							<line class="st0" x1="299.5" y1="259.9" x2="299.5" y2="275.7" />
+							<line class="st0" x1="307" y1="259.9" x2="298.1" y2="259.9" />
+							<line class="st0" x1="299.5" y1="275.7" x2="288.7" y2="275.7" />
+							<line class="st0" x1="289.2" y1="275.7" x2="289.2" y2="257.7" />
+							<line class="st0" x1="289.6" y1="259.1" x2="270.7" y2="259.1" />
+							<line class="st0" x1="176.2" y1="277.1" x2="129.4" y2="277.1" />
+							<line class="st0" x1="181.2" y1="285.9" x2="124.1" y2="285.8" />
+							<line class="st0" x1="179.9" y1="278.3" x2="179.8" y2="285.9" />
+							<line class="st0" x1="180.6" y1="279.8" x2="173.5" y2="279.8" />
+							<line class="st0" x1="132" y1="279.4" x2="124.1" y2="279.4" />
+							<line class="st0" x1="125.6" y1="284.8" x2="125.6" y2="278.9" />
+							<line class="st0" x1="134.3" y1="317.1" x2="126.2" y2="317.1" />
+							<line class="st0" x1="125.6" y1="285.8" x2="125.6" y2="318.7" />
+							<line class="st0" x1="132.8" y1="316.3" x2="132.8" y2="324.8" />
+							<line class="st0" x1="179.8" y1="285.9" x2="179.7" y2="302.7" />
+							<line class="st0" x1="179.8" y1="313.4" x2="172.9" y2="313.5" />
+							<line class="st0" x1="174.3" y1="313.4" x2="174.3" y2="328.1" />
+							<line class="st0" x1="174.3" y1="326.7" x2="160.9" y2="326.9" />
+							<line class="st0" x1="157.9" y1="326.8" x2="157.9" y2="342.5" />
+							<line class="st0" x1="165.5" y1="326.8" x2="156.5" y2="326.8" />
+							<line class="st0" x1="157.9" y1="342.5" x2="147.1" y2="342.5" />
+							<line class="st0" x1="147.6" y1="342.5" x2="147.6" y2="324.5" />
+							<line class="st0" x1="148.1" y1="326" x2="129.1" y2="326" />
+							<line class="st0" x1="384" y1="302.1" x2="262.2" y2="326.6" />
+							<rect x="209.5" y="311" class="st1" width="6.2" height="36.3" />
+							<rect x="324.2" y="296.1" class="st1" width="6.2" height="36.3" />
+							<rect (click)="reserve($event, 1)" id="_x31_" x="392.6" y="206" class="st2" width="23.2"
+								height="23.2" />
+							<rect (click)="reserve($event, 9)" id="_x39_" x="392.6" y="388.5" class="st2" width="23.2"
+								height="23.2" />
+							<rect (click)="reserve($event, 2)" id="_x32_" x="435.5" y="206" class="st2" width="23.2"
+								height="23.2" />
+							<rect (click)="reserve($event, 10)" id="_x31_0" x="435.5" y="388.4" class="st2" width="23.2"
+								height="23.2" />
+							<rect (click)="reserve($event, 3)" id="_x33__1_" x="392.1" y="286" class="st2" width="23.2"
+								height="23.2" />
+							<rect (click)="reserve($event, 5)" id="_x35_" x="392.6" y="331.1" class="st2" width="23.2"
+								height="23.2" />
+							<rect (click)="reserve($event, 7)" id="_x37_" x="392.6" y="359.8" class="st2" width="23.2"
+								height="23.2" />
+							<rect (click)="reserve($event, 4)" id="_x34_" x="435.5" y="286" class="st2" width="23.2"
+								height="23.2" />
+							<rect (click)="reserve($event, 6)" id="_x36_" x="435.5" y="330.9" class="st2" width="23.2"
+								height="23.2" />
+							<rect (click)="reserve($event, 8)" id="_x38_" x="435.5" y="359.7" class="st2" width="23.2"
+								height="23.2" />
+							<line class="st0" x1="179.7" y1="302.7" x2="179.7" y2="314.7" />
+							<line class="st0" x1="725.9" y1="276" x2="679.1" y2="276" />
+							<line class="st0" x1="730.9" y1="284.7" x2="673.8" y2="284.7" />
+							<line class="st0" x1="729.6" y1="277.2" x2="729.5" y2="284.7" />
+							<line class="st0" x1="730.3" y1="278.7" x2="723.2" y2="278.7" />
+							<line class="st0" x1="681.7" y1="278.2" x2="673.8" y2="278.2" />
+							<line class="st0" x1="675.3" y1="283.7" x2="675.3" y2="277.7" />
+							<line class="st0" x1="684" y1="316" x2="675.9" y2="316" />
+							<line class="st0" x1="675.3" y1="284.7" x2="675.3" y2="317.5" />
+							<line class="st0" x1="682.5" y1="315.1" x2="682.5" y2="323.6" />
+							<line class="st0" x1="729.5" y1="284.7" x2="729.4" y2="301.6" />
+							<line class="st0" x1="729.5" y1="312.3" x2="722.6" y2="312.3" />
+							<line class="st0" x1="724" y1="312.3" x2="724" y2="327" />
+							<line class="st0" x1="724" y1="325.5" x2="710.6" y2="325.7" />
+							<line class="st0" x1="707.6" y1="325.6" x2="707.6" y2="341.4" />
+							<line class="st0" x1="715.2" y1="325.7" x2="706.2" y2="325.7" />
+							<line class="st0" x1="707.6" y1="341.4" x2="696.8" y2="341.4" />
+							<line class="st0" x1="697.3" y1="341.4" x2="697.3" y2="323.4" />
+							<line class="st0" x1="697.8" y1="324.9" x2="680.9" y2="324.9" />
+							<line class="st0" x1="729.4" y1="301.6" x2="729.4" y2="313.5" />
+						</svg>
+					</div>
+
+					<div *ngIf="flightData.type == 3">
+						<svg version="1.1" id="Warstwa_1" xmlns="http://www.w3.org/2000/svg"
+							xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 841.9 595.3"
+							style="enable-background:new 0 0 841.9 595.3;" xml:space="preserve">
+							<style type="text/css">
+								.st0 {
+									fill: none;
+									stroke: #000000;
+									stroke-width: 3;
+									stroke-miterlimit: 10;
+								}
+
+								.st1 {
+									fill: #E31013;
+									stroke: #000000;
+									stroke-width: 3;
+									stroke-miterlimit: 10;
+								}
+
+								.st2 {
+									fill: #040304;
+									stroke: #000000;
+									stroke-width: 3;
+									stroke-miterlimit: 10;
+								}
+
+								.st3 {
+									fill: #E50505;
+									stroke: #000000;
+									stroke-width: 3;
+									stroke-miterlimit: 10;
+								}
+
+								.st4 {
+									fill: #FFFFFF;
+									stroke: #000000;
+									stroke-width: 3;
+									stroke-miterlimit: 10;
+								}
+
+								.st4:hover {
+									fill: yellow !important;
+								}
+							</style>
+							<path class="st0"
+								d="M467.8,434.9c0-27.8,0-138.8,0-224.4c0-54.9,0-99.4,0-104.7c-2.3-11.8-10-28.3-19.7-48.4
+	c-6.8-14.2-14-24.6-22.3-25.8c-15.2,2-28.2,38.9-41.3,74.3v329.1c7.3,40.5,26,110.6,41.3,111.6S459.3,475.7,467.8,434.9z" />
+							<path class="st0"
+								d="M456.1,490.2c0,0,92.7,56.8,92.7,62.4c0,5.5-111.8-16.4-111.8-16.4C443.1,524.2,449.6,507.8,456.1,490.2z" />
+							<path class="st0"
+								d="M395.1,490.6c0,0-92.7,56.8-92.7,62.4c0,5.5,111.8-16.4,111.8-16.4C408.2,524.5,401.7,508.2,395.1,490.6z" />
+							<path class="st0" d="M528.3,242.3" />
+							<path class="st0" d="M468.2,324.5" />
+							<path class="st1"
+								d="M722.3,325.4c64,31.4,113.2,58.1,106.6,62.4c-10.2,6.6-238.9-61.2-238.9-61.2" />
+							<path class="st0" d="M577.2,257.4c31,14,65.4,29.9,98.6,45.6" />
+							<path class="st0" d="M467.8,210.5c1.4-0.8,27,9.7,63.8,25.9" />
+							<line class="st0" x1="534.4" y1="210.3" x2="581.2" y2="210.3" />
+							<line class="st0" x1="529.4" y1="219" x2="586.5" y2="219" />
+							<line class="st0" x1="530.7" y1="211.5" x2="530.8" y2="219" />
+							<line class="st0" x1="530" y1="213" x2="537.1" y2="213" />
+							<line class="st0" x1="578.6" y1="212.5" x2="586.5" y2="212.5" />
+							<line class="st0" x1="585" y1="218" x2="585" y2="212" />
+							<line class="st0" x1="576.3" y1="250.3" x2="584.4" y2="250.3" />
+							<line class="st0" x1="585" y1="219" x2="585" y2="251.8" />
+							<line class="st0" x1="577.8" y1="249.4" x2="577.8" y2="257.9" />
+							<line class="st0" x1="530.8" y1="219" x2="530.9" y2="235.9" />
+							<line class="st0" x1="530.9" y1="235.9" x2="530.8" y2="248" />
+							<line class="st0" x1="530.8" y1="246.5" x2="537.7" y2="246.6" />
+							<line class="st0" x1="536.3" y1="246.6" x2="536.3" y2="261.2" />
+							<line class="st0" x1="536.3" y1="259.8" x2="549.7" y2="260" />
+							<line class="st0" x1="552.7" y1="259.9" x2="552.7" y2="275.7" />
+							<line class="st0" x1="545.2" y1="259.9" x2="554.1" y2="259.9" />
+							<line class="st0" x1="552.7" y1="275.7" x2="563.5" y2="275.7" />
+							<line class="st0" x1="563" y1="275.7" x2="563" y2="257.7" />
+							<line class="st0" x1="562.5" y1="259.1" x2="581.5" y2="259.1" />
+							<line class="st0" x1="468.2" y1="302.1" x2="591.1" y2="326.9" />
+							<rect x="259.1" y="310" class="st2" width="6.2" height="36.3" />
+							<rect x="584.1" y="308.4" class="st2" width="6.2" height="36.3" />
+							<path class="st0" d="M323.9,242.3" />
+							<path class="st0" d="M384,324.5" />
+							<path class="st3"
+								d="M133.6,323.6c-65.8,32.2-117,59.8-110.3,64.2c10.2,6.6,238.9-61.2,238.9-61.2l0.5,0" />
+							<path class="st0" d="M275,257.4c-30.3,13.5-63.8,28.7-96.2,43.8" />
+							<path class="st0" d="M384.4,210.5c-1.4-0.8-27,9.7-63.8,25.9" />
+							<line class="st0" x1="317.8" y1="210.3" x2="270.9" y2="210.3" />
+							<line class="st0" x1="322.8" y1="219" x2="265.7" y2="219" />
+							<line class="st0" x1="321.5" y1="211.5" x2="321.4" y2="219" />
+							<line class="st0" x1="322.2" y1="213" x2="315.1" y2="213" />
+							<line class="st0" x1="273.6" y1="212.5" x2="265.7" y2="212.5" />
+							<line class="st0" x1="267.1" y1="218" x2="267.1" y2="212" />
+							<line class="st0" x1="275.9" y1="250.3" x2="267.8" y2="250.3" />
+							<line class="st0" x1="267.1" y1="219" x2="267.1" y2="251.8" />
+							<line class="st0" x1="274.4" y1="249.4" x2="274.4" y2="257.9" />
+							<line class="st0" x1="321.4" y1="219" x2="321.3" y2="235.9" />
+							<line class="st0" x1="321.3" y1="235.9" x2="321.4" y2="248" />
+							<line class="st0" x1="321.4" y1="246.5" x2="314.5" y2="246.6" />
+							<line class="st0" x1="315.9" y1="246.6" x2="315.9" y2="261.2" />
+							<line class="st0" x1="315.9" y1="259.8" x2="302.5" y2="260" />
+							<line class="st0" x1="299.5" y1="259.9" x2="299.5" y2="275.7" />
+							<line class="st0" x1="307" y1="259.9" x2="298.1" y2="259.9" />
+							<line class="st0" x1="299.5" y1="275.7" x2="288.7" y2="275.7" />
+							<line class="st0" x1="289.2" y1="275.7" x2="289.2" y2="257.7" />
+							<line class="st0" x1="289.6" y1="259.1" x2="270.7" y2="259.1" />
+							<line class="st0" x1="176.2" y1="277.1" x2="129.4" y2="277.1" />
+							<line class="st0" x1="181.2" y1="285.9" x2="124.1" y2="285.8" />
+							<line class="st0" x1="179.9" y1="278.3" x2="179.8" y2="285.9" />
+							<line class="st0" x1="180.6" y1="279.8" x2="173.5" y2="279.8" />
+							<line class="st0" x1="132" y1="279.4" x2="124.1" y2="279.4" />
+							<line class="st0" x1="125.6" y1="284.8" x2="125.6" y2="278.9" />
+							<line class="st0" x1="134.3" y1="317.1" x2="126.2" y2="317.1" />
+							<line class="st0" x1="125.6" y1="285.8" x2="125.6" y2="318.7" />
+							<line class="st0" x1="132.8" y1="316.3" x2="132.8" y2="324.8" />
+							<line class="st0" x1="179.8" y1="285.9" x2="179.7" y2="302.7" />
+							<line class="st0" x1="179.8" y1="313.4" x2="172.9" y2="313.5" />
+							<line class="st0" x1="174.3" y1="313.4" x2="174.3" y2="328.1" />
+							<line class="st0" x1="174.3" y1="326.7" x2="160.9" y2="326.9" />
+							<line class="st0" x1="157.9" y1="326.8" x2="157.9" y2="342.5" />
+							<line class="st0" x1="165.5" y1="326.8" x2="156.5" y2="326.8" />
+							<line class="st0" x1="157.9" y1="342.5" x2="147.1" y2="342.5" />
+							<line class="st0" x1="147.6" y1="342.5" x2="147.6" y2="324.5" />
+							<line class="st0" x1="148.1" y1="326" x2="129.1" y2="326" />
+							<line class="st0" x1="384" y1="302.1" x2="262.2" y2="326.6" />
+							<rect (click)="reserve($event, 1)" id="_x31_" x="392.6" y="206" class="st4" width="23.2"
+								height="23.2" />
+							<rect (click)="reserve($event, 2)" id="_x32_" x="435.5" y="206" class="st4" width="23.2"
+								height="23.2" />
+							<rect (click)="reserve($event, 3)" id="_x33__1_" x="392.1" y="286" class="st4" width="23.2"
+								height="23.2" />
+							<rect (click)="reserve($event, 5)" id="_x35_" x="392.6" y="331.1" class="st4" width="23.2"
+								height="23.2" />
+							<rect (click)="reserve($event, 7)" id="_x37_" x="392.1" y="383" class="st4" width="23.2"
+								height="23.2" />
+							<rect (click)="reserve($event, 4)" id="_x34_" x="435.5" y="286" class="st4" width="23.2"
+								height="23.2" />
+							<rect (click)="reserve($event, 6)" id="_x36_" x="435.5" y="330.9" class="st4" width="23.2"
+								height="23.2" />
+							<rect (click)="reserve($event, 8)" id="_x38_" x="435.5" y="383" class="st4" width="23.2"
+								height="23.2" />
+							<line class="st0" x1="179.7" y1="302.7" x2="179.7" y2="314.7" />
+							<line class="st0" x1="725.9" y1="276" x2="679.1" y2="276" />
+							<line class="st0" x1="730.9" y1="284.7" x2="673.8" y2="284.7" />
+							<line class="st0" x1="729.6" y1="277.2" x2="729.5" y2="284.7" />
+							<line class="st0" x1="730.3" y1="278.7" x2="723.2" y2="278.7" />
+							<line class="st0" x1="681.7" y1="278.2" x2="673.8" y2="278.2" />
+							<line class="st0" x1="675.3" y1="283.7" x2="675.3" y2="277.7" />
+							<line class="st0" x1="684" y1="316" x2="675.9" y2="316" />
+							<line class="st0" x1="675.3" y1="284.7" x2="675.3" y2="317.5" />
+							<line class="st0" x1="682.5" y1="315.1" x2="682.5" y2="323.6" />
+							<line class="st0" x1="729.5" y1="284.7" x2="729.4" y2="301.6" />
+							<line class="st0" x1="729.5" y1="312.3" x2="722.6" y2="312.3" />
+							<line class="st0" x1="724" y1="312.3" x2="724" y2="327" />
+							<line class="st0" x1="724" y1="325.5" x2="710.6" y2="325.7" />
+							<line class="st0" x1="707.6" y1="325.6" x2="707.6" y2="341.4" />
+							<line class="st0" x1="715.2" y1="325.7" x2="706.2" y2="325.7" />
+							<line class="st0" x1="707.6" y1="341.4" x2="696.8" y2="341.4" />
+							<line class="st0" x1="697.3" y1="341.4" x2="697.3" y2="323.4" />
+							<line class="st0" x1="697.8" y1="324.9" x2="680.9" y2="324.9" />
+							<line class="st0" x1="729.4" y1="301.6" x2="729.4" y2="313.5" />
+							<path class="st0" d="M467.2,103.4c-26-36-53.2-39.5-81.9,0" />
+							<line class="st0" x1="384.4" y1="105.8" x2="467.8" y2="105.8" />
+							<path class="st2" d="M475.2,504.5c0,0,74.4,47.9,70.8,47.4c-3.6-0.5-84.3-11.7-84.3-11.7" />
+							<path class="st2" d="M386.7,540.3c0,0-87.1,15.4-84.1,13.3c3-2.1,69.8-48.7,69.8-48.7" />
+							<line class="st0" x1="789" y1="359.5" x2="741.3" y2="369.3" />
+							<line class="st3" x1="47.4" y1="368.3" x2="119" y2="367.2" />
+						</svg>
+
+					</div>
+				</div>
+			</div>
+			<div *ngIf="stage == 2" class="row">
+				<div class="col-md-12">
+					<div class="row">
+						<div class="col-md-12">
+							<h3>Brawo! Jesteś właścicielem następujących biltetów:</h3>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="row">
+								<div *ngFor="let card of shoppingCart" class="card col-md-3 m-3 p-0">
+									<div class="card-header">
+										Bilet <b>{{flightData.from}}</b>-<b>{{flightData.to}}</b>
+									</div>
+									<ul class="list-group list-group-flush">
+										<li class="list-group-item">
+											Typ biletu: {{discountArr[card.discount]}}
+										</li>
+										<li class="list-group-item">
+											Bagaż: {{luggageArr[card.luggage]}}
+										</li>
+										<li class="list-group-item">
+											Cena: {{card.price}} {{currency}}
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<h2>Łączna cena: {{calculatedPrice}} {{currency}}</h2>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<router-outlet> </router-outlet>

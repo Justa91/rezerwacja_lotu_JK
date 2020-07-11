@@ -1,0 +1,86 @@
+<h3 class="float-right">
+  <timer></timer>
+</h3>
+<div class="content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="form-group">
+          <div class="col-md-12">
+            <h3>WYBIERZ LOT</h3>
+          </div>
+          <hr>
+          <div>
+            <label for="departureTime">Data odlotu</label>
+            <input (change)="adaptFilters()" class="form-control" type="date" id="departureTime"
+              [(ngModel)]="departureTime">
+            <hr>
+            <label for="arrivalTime">Data przylotu</label>
+            <input (change)="adaptFilters()" class="form-control" type="date" id="arrivalTime"
+              [(ngModel)]="arrivalTime">
+            <hr>
+            <select (change)="adaptFilters()" class="form-control" [(ngModel)]="departurePlace">
+              <option value="null" disabled selected>Miejsce odlotu</option>
+              <option *ngFor="let place of availablePlaces" [ngValue]="place">{{place}}</option>
+            </select>
+            <hr>
+            <select (change)="adaptFilters()" class="form-control" [(ngModel)]="arrivalPlace">
+              <option value="null" disabled selected>Miejsce Przylotu</option>
+              <option *ngFor="let place of availablePlaces" [ngValue]="place">{{place}}</option>
+            </select>
+            <hr>
+            <button class="btn btn-secondary mt-3" (click)="reset()">Resetuj filtry</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-9">
+        <div class="card" *ngFor="let flight of flightList">
+          <div class="card-body">
+            <div class="card-header mb-3">
+              <h5 class="card-title ">
+                Lot
+              </h5>
+              <div class="row">
+                <div class="col-md-1 text-muted">
+                  <h6>
+                    z
+                  </h6>
+                </div>
+                <div class="col-md-2">
+                  <h6>
+                    {{flight.from}}
+                  </h6>
+                </div>
+                <div class="col-md-1 text-muted">
+                  <h6>
+                    do
+                  </h6>
+                </div>
+
+                <div class="col-md-2">
+                  <h6>
+                    {{flight.to}}
+                  </h6>
+                </div>
+              </div>
+            </div>
+            <p class="card-text">
+              {{flight.dep}} -------------------------> {{flight.arrival}}
+            </p>
+
+            <div class="col-md-6 text-muted">
+              <h6>
+                Typ samolotu: {{flight.type}}
+              </h6>
+            </div>
+            <button class="btn btn-primary" (click)="goto(flight.id)">Rezerwuj lot</button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <router-outlet> </router-outlet>
+  </div>
+</div>

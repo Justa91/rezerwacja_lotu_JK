@@ -1,0 +1,21 @@
+<body>
+
+  <form class="form-signin">
+
+    <h1 class="h3 mb-3">Zaloguj się</h1>
+
+    <label for="inputEmail" class="sr-only">email</label>
+    <input type="email" id="inputEmail" class="form-control mb-2" placeholder="Podaj email" required="" autofocus=""
+      #email>
+    <label for="inputPassword" class="sr-only">haslo</label>
+    <input type="password" id="inputPassword" class="form-control mb-2" placeholder="Podaj hasło" required="" #password>
+    <button (click)="log(email, password)" class="btn btn-lg btn-primary btn-block" type="submit">Zaloguj</button>
+    <b style="color:red;">{{ comUser }}</b>
+    <hr>
+    <p class="mt-5 mb-3 text-muted">© Angular Justyna Krupa</p>
+  </form>
+
+
+</body>
+
+<router-outlet> </router-outlet>
